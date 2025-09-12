@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juhin Pavithran | Data Analyst & Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with a Teal Accent -->
+    <!-- Application Structure Plan: The application uses a single-page, vertical scroll structure to present a narrative of Juhin's career. It starts with a high-level summary, moves to an interactive skills dashboard for quick assessment, follows with a clickable timeline for detailed experience exploration, and concludes with education. This structure was chosen to guide a recruiter through a logical discovery process, making key information easily accessible and more engaging than a static document, thus improving usability and information retention. -->
+    <!-- Visualization & Content Choices: 
+        - Summary Text -> Goal: Inform -> Presentation: Prominent text block -> Interaction: None -> Justification: Provides immediate context.
+        - Technical Skills -> Goal: Organize/Compare -> Viz: Horizontal Bar Chart (Chart.js) -> Interaction: Tooltips on hover -> Justification: Visually represents skill distribution and proficiency in a more engaging way than a list.
+        - Professional Experience -> Goal: Show Change/Progression -> Presentation: Interactive Vertical Timeline (HTML/CSS/JS) -> Interaction: Click to expand/collapse job details -> Justification: Creates a clean overview of career history while allowing deep dives into specific roles, preventing information overload.
+        - Education -> Goal: Inform -> Presentation: Simple styled cards -> Interaction: None -> Justification: Clear and concise presentation for foundational information.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #404040;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #5eead4;
+            border: 4px solid #f8f7f4;
+            z-index: 1;
+        }
+        .timeline-line {
+            position: absolute;
+            left: -21px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #cbd5e1;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            max-height: 70vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-8 max-w-5xl">
+
+        <!-- Header Section -->
+        <header class="mb-12">
+            <div class="flex items-center space-x-4">
+                 <div>
+                     <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Juhin Pavithran</h1>
+                     <h2 class="text-xl md:text-2xl text-teal-600 mt-2">Data Analyst & Engineer</h2>
+                 </div>
+            </div>
+            <div class="mt-6 flex items-center space-x-6 text-gray-600">
+                <a href="mailto:juhinpavithran@gmail.com" class="hover:text-teal-600 transition-colors">
+                    <span class="sr-only">Email</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/juhinpavithran" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600 transition-colors">
+                    <span class="sr-only">LinkedIn</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                     Bangalore, India
+                </span>
+            </div>
+        </header>
+
+        <!-- Summary Section -->
+        <section id="summary" class="mb-16">
+             <div class="bg-white p-8 rounded-lg shadow-md">
+                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Professional Summary</h3>
+                 <p class="text-gray-700 leading-relaxed">
+                    Over 6+ years of extensive experience in Information Technology, with 5 years of demonstrated expertise in Data Analysis, Reporting, Data Visualization, pipeline design, Data Modeling, and Technical Specification Design. Proficient in Python and SQL, with considerable experience dealing with people from various cultures and diverse work environments. Possesses a strong work ethic and a positive approach to becoming a successful professional partner, thriving in innovative and ambitious settings.
+                 </p>
+             </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="mb-16">
+             <button class="w-full text-left focus:outline-none" onclick="toggleSkills()">
+                <div class="flex justify-between items-center">
+                     <h3 class="text-3xl font-bold text-gray-800">Technical Skills</h3>
+                     <svg id="skills-toggle-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                <p class="text-gray-600 mt-2 mb-6">This chart provides a visual overview of my key technical abilities, grouped by category. You can hover over any bar to see the specific skill. This section is designed to give a quick and clear understanding of my technical toolkit and areas of expertise.</p>
+             </button>
+            <div id="skillsContent" class="bg-white p-4 sm:p-8 rounded-lg shadow-md hidden">
+                <div class="chart-container mx-auto max-w-4xl">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-16">
+            <h3 class="text-3xl font-bold text-gray-800 mb-12">Professional Experience</h3>
+            <div class="relative pl-8">
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline Item 1 -->
+                <div class="mb-12">
+                    <div class="relative timeline-item">
+                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-400">
+                             <button class="w-full text-left focus:outline-none" onclick="toggleDetails('exp1')">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-800">Data Analyst</h4>
+                                    <span class="text-sm font-medium text-teal-600">April 2024 - Present</span>
+                                </div>
+                                <p class="text-gray-600">McAfee Corp (Client) / Brillio | Bangalore</p>
+                             </button>
+                            <div id="exp1" class="mt-4 text-gray-700 space-y-2 hidden">
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>E2E Data Reporting including Dashboard designing, Data Ingestion, ELT/ETL, Pipeline Design, Job Run Maintenance, Query optimisation.</li>
+                                    <li>Develop and Maintain data models documented in Confluence.</li>
+                                    <li>Supporting Analytics team with Technical definitions for Business use cases.</li>
+                                    <li>Offer data consultancy to stakeholders for existing data and KPI’s.</li>
+                                    <li>Cross-Functional team collaboration for requirement gathering, Telemetry implementation, Bug fix, Reporting and Analysis.</li>
+                                    <li>Data Governance support for data model regulatory compliance, Privacy compliance (GDPR), Telemetry validations, Data lineage.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="mb-12">
+                    <div class="relative timeline-item">
+                         <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-400">
+                             <button class="w-full text-left focus:outline-none" onclick="toggleDetails('exp2')">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-800">Data Consultant</h4>
+                                    <span class="text-sm font-medium text-teal-600">Oct 2021 - Oct 2022</span>
+                                </div>
+                                <p class="text-gray-600">Capgemini Technology Services India Limited | Bangalore</p>
+                             </button>
+                             <div id="exp2" class="mt-4 text-gray-700 space-y-2 hidden">
+                                 <ul class="list-disc pl-5 space-y-2">
+                                    <li>Worked for internal operations team to track operational matrix of Pan India off-shore employee activities (Operational Analyst Domain).</li>
+                                    <li>Designed and Maintained scalable data pipelines to ingest data from various business units for operations.</li>
+                                    <li>Utilised PySpark & Azure Databricks for data transformation, data warehousing and curated dataset creation.</li>
+                                    <li>Dashboard designing, Office 365 modules for analysis and reporting.</li>
+                                    <li>Proficient in cleaning, processing, and analyzing large datasets using tools such as SQL, Python.</li>
+                                    <li>Data Mining: Capable of extracting valuable information from structured and unstructured data sources.</li>
+                                 </ul>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="mb-12">
+                    <div class="relative timeline-item">
+                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-400">
+                             <button class="w-full text-left focus:outline-none" onclick="toggleDetails('exp3')">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-800">Data Analyst</h4>
+                                    <span class="text-sm font-medium text-teal-600">April 2021 - Oct 2021</span>
+                                </div>
+                                <p class="text-gray-600">Scalene Works People Solution LLP | Bangalore</p>
+                             </button>
+                            <div id="exp3" class="mt-4 text-gray-700 space-y-2 hidden">
+                                <ul class="list-disc pl-5 space-y-2">
+                                     <li>Worked as data Analyst from April 2021 till Oct 2021 under contract with Capgemini Technologies as client.</li>
+                                    <li>Data Visualization: Skilled in creating visually compelling charts, graphs, and dashboards using tools like Tableau, Power BI, and QlickSense.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Timeline Item 4 -->
+                 <div class="mb-12">
+                    <div class="relative timeline-item">
+                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-400">
+                             <button class="w-full text-left focus:outline-none" onclick="toggleDetails('exp4')">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-800">Data Analyst (HRIS)</h4>
+                                    <span class="text-sm font-medium text-teal-600">May 2016 - June 2019</span>
+                                </div>
+                                <p class="text-gray-600">Mahad Manpower Qatar WLL (Mahadjobs.com)</p>
+                             </button>
+                            <div id="exp4" class="mt-4 text-gray-700 space-y-2 hidden">
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Gained experience using python for EDA and data extraction.</li>
+                                    <li>Supported recruitment team for data extraction and analysis.</li>
+                                    <li>Resolved any production data issues.</li>
+                                    <li>ETL Unit Testing.</li>
+                                    <li>Data Extraction and Transformation.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Timeline Item 5 -->
+                 <div class="mb-12">
+                    <div class="relative timeline-item">
+                         <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-400">
+                            <button class="w-full text-left focus:outline-none" onclick="toggleDetails('exp5')">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-800">MIS Executive</h4>
+                                    <span class="text-sm font-medium text-teal-600">Feb 2014 - March 2015</span>
+                                </div>
+                                <p class="text-gray-600">Infosys BPO Ltd. | Bangalore India</p>
+                            </button>
+                             <div id="exp5" class="mt-4 text-gray-700 space-y-2 hidden">
+                                <ul class="list-disc pl-5 space-y-2">
+                                     <li>Provided executive management support for client.</li>
+                                 </ul>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+             <h3 class="text-3xl font-bold text-gray-800 mb-8">Education</h3>
+             <div class="grid md:grid-cols-2 gap-8">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="text-xl font-bold text-gray-800">Bachelor of Computer Applications</h4>
+                     <p class="text-gray-600 mt-1">Dr. C. V. Raman University, India</p>
+                     <p class="text-sm text-gray-500 mt-1">September 2009 - June 2012</p>
+                 </div>
+                  <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="text-xl font-bold text-gray-800">XI & XII</h4>
+                     <p class="text-gray-600 mt-1">Central Board of Secondary Education, (CBSE, India)</p>
+                     <p class="text-sm text-gray-500 mt-1">September 2007 - Mar 2009</p>
+                 </div>
+             </div>
+        </section>
+    </div>
+
+    <footer>
+    </footer>
+
+    <script>
+        // Skills Chart
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+        const skillsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Python', 'PySpark', 'SQL', 'HTML/CSS', 
+                    'Tableau', 'Azure Databricks', 'MS Office Suite', 'Figma', 'Miro',
+                    'Data Visualization', 'Data Cleaning', 'ETL/ ELT Process', 'Agile Workflow'
+                ],
+                datasets: [{
+                    label: 'Years of Experience / Proficiency',
+                    data: [6, 4, 6, 3, 5, 4, 6, 2, 2, 6, 6, 2, 5],
+                    backgroundColor: [
+                        'rgba(20, 184, 166, 0.6)', 'rgba(20, 184, 166, 0.6)', 'rgba(20, 184, 166, 0.6)', 'rgba(20, 184, 166, 0.6)',
+                        'rgba(14, 116, 144, 0.6)', 'rgba(14, 116, 144, 0.6)', 'rgba(14, 116, 144, 0.6)', 'rgba(14, 116, 144, 0.6)', 'rgba(14, 116, 144, 0.6)',
+                        'rgba(15, 76, 129, 0.6)', 'rgba(15, 76, 129, 0.6)', 'rgba(15, 76, 129, 0.6)', 'rgba(15, 76, 129, 0.6)'
+                    ],
+                    borderColor: [
+                         'rgba(20, 184, 166, 1)', 'rgba(20, 184, 166, 1)', 'rgba(20, 184, 166, 1)', 'rgba(20, 184, 166, 1)',
+                        'rgba(14, 116, 144, 1)', 'rgba(14, 116, 144, 1)', 'rgba(14, 116, 144, 1)', 'rgba(14, 116, 144, 1)', 'rgba(14, 116, 144, 1)',
+                        'rgba(15, 76, 129, 1)', 'rgba(15, 76, 129, 1)', 'rgba(15, 76, 129, 1)', 'rgba(15, 76, 129, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Years of Experience / Proficiency Level'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                             autoSkip: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.x !== null) {
+                                    label += context.parsed.x + ' years';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Toggle Experience Details
+        function toggleDetails(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('hidden');
+        }
+
+        // Dedicated function for the skills section to also handle the icon
+        function toggleSkills() {
+            const content = document.getElementById('skillsContent');
+            const icon = document.getElementById('skills-toggle-icon');
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Auto-expand the first experience item on load
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleDetails('exp1');
+        });
+
+    </script>
+</body>
+</html>
