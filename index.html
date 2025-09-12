@@ -145,18 +145,21 @@
 
         <!-- Skills Section -->
         <section id="skills" class="mb-16">
-             <button class="w-full text-left focus:outline-none" onclick="toggleSkills()">
-                <div class="flex justify-between items-center">
-                     <h3 class="text-3xl font-bold text-gray-800">Technical Skills</h3>
-                     <svg id="skills-toggle-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
-                <p class="text-gray-600 mt-2 mb-6">This chart provides a visual overview of my key technical abilities, grouped by category. You can hover over any bar to see the specific skill. This section is designed to give a quick and clear understanding of my technical toolkit and areas of expertise.</p>
-             </button>
-            <div id="skillsContent" class="bg-white p-4 sm:p-8 rounded-lg shadow-md hidden">
-                <div class="chart-container mx-auto max-w-4xl">
-                    <canvas id="skillsChart"></canvas>
+            <!-- New white box wrapper for the entire skills section -->
+            <div class="bg-white p-4 sm:p-8 rounded-lg shadow-md">
+                 <button class="w-full text-left focus:outline-none" onclick="toggleSkills()">
+                    <div class="flex justify-between items-center">
+                         <h3 class="text-3xl font-bold text-gray-800">Technical Skills</h3>
+                         <svg id="skills-toggle-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-600 mt-2 mb-6">This chart provides a visual overview of my key technical abilities, grouped by category. You can hover over any bar to see the specific skill. This section is designed to give a quick and clear understanding of my technical toolkit and areas of expertise.</p>
+                 </button>
+                <div id="skillsContent" class="hidden">
+                    <div class="chart-container mx-auto max-w-4xl">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
                 </div>
             </div>
         </section>
